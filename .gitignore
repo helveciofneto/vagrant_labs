@@ -1,0 +1,9 @@
+*.vagrant*
+*.vscode*
+
+# The */etc/ directory is reserved for local files and settings that
+# must be synced/visible through /vagrant/etc/ within the created VM.
+# Also, the project's Vagrantfile may read from this path to
+# load additional custom vagrantfile settings (i.e. vagrant_local_settings.rb)
+# which aren't suitable for sharing in GitHub (secrets, local sync paths, etc).
+*/etc/
