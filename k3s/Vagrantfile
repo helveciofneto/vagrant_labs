@@ -1,5 +1,6 @@
 HOSTNAME = "k3s"
-OS_IMAGE = "ubuntu/jammy64"
+BOX_NAME = "ubuntu/jammy64"
+BOX_VERSION = "20231012.0.0" # 20231018.0.0 broke kustomize install script.
 IP_ADDRESS = "192.168.56.20"
 RAM_MB = "4096"
 CPU_COUNT = 4
@@ -11,7 +12,8 @@ if File.file?(LOCAL_SETTINGS_PATH) then
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.box = OS_IMAGE
+  config.vm.box = BOX_NAME
+  config.vm.box_version = BOX_VERSION
   config.vm.network "private_network", ip: IP_ADDRESS
   config.vm.hostname = HOSTNAME
   config.vm.provider "virtualbox" do |vb|
