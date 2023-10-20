@@ -6,10 +6,15 @@
 # Install buildah
 # curl -F didn't work.
 apt-get -y install buildah
-
-# Set docker.io as a registry so that build commands can resolve from Docker Hub.
-echo 'unqualified-search-registries = ["docker.io"]' > '/etc/containers/registries.conf.d/00-unqualified-search-registries.conf'
-
-echo "=============================="
-echo "buildah Install complete!"
-echo "=============================="
+if test "${?}" -ne 0; then
+  echo "=============================="
+  echo "Buildah Install FAILED!"
+  echo "This is not critical, but you may be unable to publish container images until this is fixed."
+  echo "=============================="
+else
+  # Set docker.io as a registry so that build commands can resolve from Docker Hub.
+  echo 'unqualified-search-registries = ["docker.io"]' > '/etc/containers/registries.conf.d/00-unqualified-search-registries.conf'
+  echo "=============================="
+  echo "Buildah Install SUCCESSFUL!"
+  echo "=============================="
+fi
