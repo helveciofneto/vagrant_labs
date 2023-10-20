@@ -10,14 +10,14 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
 
 - ### Install Virtualbox
   - Website: https://www.virtualbox.org/
-  - Recommended version is `7.0.10`. If you have an older version installed, consider upgrading it.
+  - The most recent validated version is **`7.0.10`**. If you have an older version installed, consider upgrading it.
   ---
   ***IMPORTANT:** On Windows, ensure Virtualbox is installed in a path without special characters (e.g. `C:\virtualbox`).*
 
   ---
 - ### Install Vagrant
   - Website: https://www.vagrantup.com/
-  - Recommended install version is `2.3.7` (2.4.0 had problems connecting via SSH in Windows hosts).
+  - Recommended install version is **`2.3.7`** (the VM images used in this repository aren't fully validated with the SSH changes implemented in version 2.4.0).
   - After the install is complete, run `vagrant --version` to confirm Vagrant was installed correctly:
     ```bash
     $ vagrant --version
