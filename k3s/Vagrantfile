@@ -6,11 +6,6 @@ RAM_MB = "4096"
 CPU_COUNT = 4
 LOCAL_SETTINGS_PATH = "etc/custom_vagrantfile_settings.rb"
 
-# Checks if LOCAL_SETTINGS_PATH exists before attempting to load it.
-if File.file?(LOCAL_SETTINGS_PATH) then
-  load LOCAL_SETTINGS_PATH
-end
-
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME
   config.vm.box_version = BOX_VERSION
@@ -28,15 +23,22 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     # Install some useful packages.
-    apt-get -y install htop nano vim
+    apt-get -y install htop nano vim zip
     apt-get -y update
     apt-get -y upgrade
 
   SHELL
 
-  config.vm.provision "shell", path: "../shared/buildah_install.sh"
-  config.vm.provision "shell", path: "../shared/k3s_install.sh"
-
   # Ensure that updates that require a restart are properly applied.
   config.vm.provision :reload
+
+  # Install Buildah/K3s/Kustomize
+  config.vm.provision "shell", path: "../shared/buildah.sh"
+  config.vm.provision "shell", path: "../shared/k3s.sh"
+  config.vm.provision "shell", path: "../shared/kustomize.sh"
+end
+
+# Checks if LOCAL_SETTINGS_PATH exists and then attempt to load it.
+if File.file?(LOCAL_SETTINGS_PATH) then
+  load LOCAL_SETTINGS_PATH
 end
