@@ -39,19 +39,21 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
 
   ---
 
-# Custom Vagrant/Ruby Files
-Each lab may have a `./etc/` subdirectory that is intended to run additional `.rb` files/commands that may be specific to your local system.
+# Customizing your Vagrant Lab
+As you become more familiar with each lab environment, you may want to add commands, scripts and data to taylor them to your needs.
 
-Everything that is added to `./etc/` remains on your local system and is never uploaded.
+To allow such customizations without breaking the integrity and upgradeability of the repository, each lab supports the creation of a subdirectory called `./etc/` that is intended to run additional `.rb` files/commands that are specific to your local system.
 
-All `.rb` files that are found are automatically executed by the respective lab's `Vagrantfile` in alphabetical order; while other executable files such as `.sh` scripts aren't executed directly, they can be indirectly called from these `.rb` files though.
+Everything that is added to a lab's `./etc/` remains on your local system and is never uploaded, so you don't need to worry about merge conflicts that prevent you from receiving updates.
+
+All `.rb` files found in `./etc/` are automatically executed by the respective lab's `Vagrantfile` in alphabetical order. While other files such as `.sh` scripts aren't executed directly, they can be indirectly called from these `.rb` files though.
 
 Some use cases include:
-- Create a folder sync to a path that only exists in your computer;
-- Run a shared or custom Shell script or executable file;
-- Declare Environment Variables/Secrets to be consumed by your VMs without exposing them as code to other users.
+- Creating a folder sync to a path that only exists in your computer;
+- Running a shared or custom Shell script or executable file;
+- Declaring Environment Variables/Secrets to be consumed by your scripts/VMs without exposing them.
 
-The following files give an example of how `./etc/` can be used:
+The following is an example of how `./etc/` can be used:
 
 - `./etc/secrets.rb`
   ```ruby
@@ -65,6 +67,9 @@ The following files give an example of how `./etc/` can be used:
 
 - `./etc/custom_settings.rb`
   ```ruby
+  # This file extends the lab's Vagrantfile with custom actions that are only relevant in your local context.
+  # Just like the first file, this also remains only on your local computer.
+
   # Include secrets from "./etc/secrets.rb":
   require_relative "secrets.rb"
   include Secrets
