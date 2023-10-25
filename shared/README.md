@@ -7,10 +7,6 @@ They are tweaked to run as part of a Vagrant deployment and may assume Vagrant-r
   Installs the AWS CLI V2 according to the following instructions: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html.
 
   After the installation is complete, it's still necessary to manually set it up (credentials, region, etc) by following the instructions in this URL: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
-- ## `buildah.sh`
-  Buildah is a tool that facilitates building Open Container Initiative (OCI) container images. It is therefore possible to manage images without the need to install Docker.
-
-  This script installs Buildah and adds the **`docker.io`** registry so that build commands can resolve from Docker Hub.
 - ## `k3s.sh`
   K3s (https://k3s.io/) is a lightweight Kubernetes distribution. It is the basis of all Kubernetes-related labs in this repository.
 
