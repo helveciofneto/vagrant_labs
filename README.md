@@ -40,7 +40,7 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
   ---
 
 # Custom Vagrant/Ruby Files
-Each lab has a `./etc/` subdirectory that is intended to run additional `.rb` files/commands that may be specific to your local system.
+Each lab may have a `./etc/` subdirectory that is intended to run additional `.rb` files/commands that may be specific to your local system.
 
 With the exception of `.md` files, nothing that is added to that subdirectory will be uploaded, and only `.rb` files are executed by Vagrantfile (other files such as `.sh` scripts can be indirectly called from these `.rb` files though).
 
