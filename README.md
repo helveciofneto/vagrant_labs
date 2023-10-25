@@ -38,3 +38,34 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
   ***NOTE:** On Windows, it may be necessary to reboot the system at this point.*
 
   ---
+
+# Custom Vagrant/Ruby Files
+Each lab has a `./etc/` subdirectory that is intended to run additional `.rb` files/commands that may be specific to your local system.
+
+With the exception of `.md` files, nothing that is added to that subdirectory will be uploaded, and only `.rb` files are executed by Vagrantfile (other files such as `.sh` scripts can be indirectly called from these `.rb` files though).
+
+Some use cases include:
+- Create a folder sync to a path that only exists in your computer;
+- Run a shared or custom Shell script or executable file;
+- Declare Environment Variables/Secrets to be consumed by your VMs without exposing them as code to other users.
+
+The following is a sample file that can be saved as `./etc/example.rb`:
+```ruby
+# Include secrets from a file called "secrets.rb":
+require_relative "secrets.rb"
+include Secrets
+
+Vagrant.configure("2") do |config|
+  # Sync local directory:
+  config.vm.synced_folder "D:/K8s", "/home/vagrant/localdir", type: "virtualbox"
+
+  # Run a shared script:
+  config.vm.provision "shell", path: "../shared/aws_cli.sh"
+
+  # Run a custom script with the included secrets:
+  config.vm.provision "shell",
+    path: "./etc/custom_script.sh",
+    env: {"USERNAME" => Secrets::USERNAME,
+          "PASSWORD" => Secrets::PASSWORD}
+end
+```
