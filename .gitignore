@@ -6,4 +6,4 @@
 # Also, the project's Vagrantfile may read from this path to
 # load additional custom vagrantfile settings (i.e. vagrant_local_settings.rb)
 # which aren't suitable for sharing in GitHub (secrets, local sync paths, etc).
-*/etc/
+*/etc/*.rb

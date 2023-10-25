@@ -43,3 +43,6 @@ Vagrant.configure("2") do |config|
     path: "awx_install.sh",
     env: {"IP_ADDRESS" => IP_ADDRESS, "NODE_PORT" => NODE_PORT}
 end
+
+# Load additional .rb files in ./etc/, if present.
+Dir["./etc/*.rb"].each{|rubyfile| load rubyfile}

@@ -4,7 +4,6 @@ BOX_VERSION = "20231012.0.0" # 20231018.0.0 broke kustomize install script.
 IP_ADDRESS = "192.168.56.20"
 RAM_MB = "4096"
 CPU_COUNT = 4
-LOCAL_SETTINGS_PATH = "etc/custom_vagrantfile_settings.rb"
 
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME
@@ -37,7 +36,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "../shared/kustomize.sh"
 end
 
-# Checks if LOCAL_SETTINGS_PATH exists and then attempt to load it.
-if File.file?(LOCAL_SETTINGS_PATH) then
-  load LOCAL_SETTINGS_PATH
-end
+# Load additional .rb files in ./etc/, if present.
+Dir["./etc/*.rb"].each{|rubyfile| load rubyfile}
