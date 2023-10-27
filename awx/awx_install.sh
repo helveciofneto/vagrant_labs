@@ -101,6 +101,6 @@ echo "AWX IS READY FOR USE!"
 echo "AWX URL: http://${IP_ADDRESS}:${NODE_PORT}"
 printf "AWX admin password: "
 kubectl get secret -n awx awx-admin-password -o jsonpath="{.data.password}" | base64 --decode
-print "\n\n"
+printf "\n\n"
 echo "It may take a couple of minutes before AWX is responsive through the web browser."
 printf "==============================\n"
