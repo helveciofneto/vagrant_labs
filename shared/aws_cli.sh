@@ -6,7 +6,7 @@
 # Install AWS CLI
 # curl -F didn't work.
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+unzip -q awscliv2.zip
 ./aws/install
 su - vagrant -c "aws --version"
 if test "${?}" -ne 0; then
