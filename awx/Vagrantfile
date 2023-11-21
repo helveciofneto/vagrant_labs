@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     # Install some useful packages.
-    apt-get -yqq install buildah htop nano policycoreutils vim whois zip
+    apt-get -yqq install buildah gh htop nano policycoreutils vim whois zip
     apt-get -yqq update
     apt-get -yqq upgrade
 
