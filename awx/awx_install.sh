@@ -9,8 +9,8 @@
 # Requirements:
 # K3s and Kustomize install handled by shared/k3s_install.sh
 
-# 30 checks every 30 seconds = 15 minutes
-max_checks=30
+# 60 checks every 30 seconds = 30 minutes
+max_checks=60
 check_interval=30
 
 # Build AWX Operator
@@ -70,6 +70,11 @@ if test "$(pgrep -cf "awx-manage migrate")" -eq 0; then
   echo "=============================="
   echo "Database Migration FAILED to start!"
   echo "It is highly recommended to restart the deployment process."
+  printf "In case you still want to wait, follows AWX admin password: "
+  kubectl get secret -n awx awx-admin-password -o jsonpath="{.data.password}" | base64 --decode
+  printf "\n\n"
+  echo "To watch the deployment status, run 'kubectl -n awx get pods'."
+  echo "To watch if a database migration is in progress, look for 'awx-manage migrate' in running processes."
   echo "=============================="
   exit 1
 else
@@ -88,6 +93,11 @@ if test "$(pgrep -cf "awx-manage migrate")" -gt 0; then
   echo "=============================="
   echo "Database Migration task TIMED OUT!"
   echo "It is highly recommended to restart the deployment process."
+  printf "In case you still want to wait, follows AWX admin password: "
+  kubectl get secret -n awx awx-admin-password -o jsonpath="{.data.password}" | base64 --decode
+  printf "\n\n"
+  echo "To watch the deployment status, run 'kubectl -n awx get pods'."
+  echo "To watch if a database migration is in progress, look for 'awx-manage migrate' in running processes."
   echo "=============================="
   exit 1
 else
