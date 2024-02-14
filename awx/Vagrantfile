@@ -26,9 +26,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "awx.yaml", destination: "/home/vagrant/awx.yaml"
 
   config.vm.provision "shell", inline: <<-SHELL
+    apt-get -yqq update
+
     # Install some useful packages.
     apt-get -yqq install buildah gh htop nano policycoreutils vim whois zip
-    apt-get -yqq update
+    apt-get -yqq install apt-transport-https ca-certificates gnupg curl sudo
+    apt-get -yqq install build-essential python3-pip
+
     apt-get -yqq upgrade
 
   SHELL
