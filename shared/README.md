@@ -11,7 +11,6 @@ They are tweaked to run as part of a Vagrant deployment and may assume Vagrant-r
   This script installs GCloud CLI as instructed here: https://cloud.google.com/sdk/docs/install#deb.
 
   After the installation completes, it is necessary to run `gcloud init` to connect to the appropriate Account/Project.
-
 - ## `homebrew.sh`
   [Homebrew](https://brew.sh/) is a Mac and Linux Package Management utility that simplifies dependendcy handling. It is possible, for instance, to manage the instalation of `kubenctx/kubens` and `fzf` and their dependencies in a single command, without dealing with additional repository-related steps.
 - ## `k3s.sh`
