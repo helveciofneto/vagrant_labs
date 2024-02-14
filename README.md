@@ -10,18 +10,18 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
 
 - ### Install Virtualbox
   - Website: https://www.virtualbox.org/
-  - The most recent validated version is **`7.0.10`**. If you have an older version installed, consider upgrading it.
+  - The most recent validated version is **`7.0.14`**. If you have an older version installed, consider upgrading it.
   ---
   ***IMPORTANT:** On Windows, ensure Virtualbox is installed in a path without special characters (e.g. `C:\virtualbox`).*
 
   ---
 - ### Install Vagrant
   - Website: https://www.vagrantup.com/
-  - Recommended install version is **`2.3.7`** (the VM images used in this repository aren't fully validated with the SSH changes implemented in version 2.4.0).
+  - Recommended install version is **`2.4.1`**
   - After the install is complete, run `vagrant --version` to confirm Vagrant was installed correctly:
     ```bash
     $ vagrant --version
-    Vagrant 2.3.7
+    Vagrant 2.4.1
     $
     ```
 - ### Install Vagrant Plugins
@@ -29,7 +29,7 @@ The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashic
     ```bash
     $ vagrant plugin install vagrant-vbguest vagrant-reload
     Installing the 'vagrant-vbguest' plugin. This can take a few minutes...
-    Installed the plugin 'vagrant-vbguest (0.31.0)'!
+    Installed the plugin 'vagrant-vbguest (0.32.0)'!
     Installing the 'vagrant-reload' plugin. This can take a few minutes...
     Installed the plugin 'vagrant-reload (0.0.1)'!
     $
