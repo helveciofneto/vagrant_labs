@@ -29,9 +29,9 @@ Vagrant.configure("2") do |config|
     apt-get -yqq update
 
     # Install some useful packages.
-    apt-get -yqq install buildah gh htop nano policycoreutils vim whois zip
+    apt-get -yqq install gh htop nano policycoreutils vim whois zip
     apt-get -yqq install apt-transport-https ca-certificates gnupg curl sudo
-    apt-get -yqq install build-essential python3-pip
+    apt-get -yqq install build-essential python3-pip jq glances podman
 
     apt-get -yqq upgrade
 
