@@ -30,15 +30,18 @@ Vagrant.configure("2") do |config|
 
     apt-get -yqq upgrade
 
+    su - vagrant -c "python3 -m pip install pylint mypy --user"
+
   SHELL
 
   # Ensure that updates that require a restart are properly applied.
   config.vm.provision :reload
 
-  # Install K3s, Kustomize and Helm.
+  # Install Shared Content.
   config.vm.provision "shell", path: "../shared/k3s.sh"
   config.vm.provision "shell", path: "../shared/kustomize.sh"
   config.vm.provision "shell", path: "../shared/helm.sh"
+  config.vm.provision "shell", path: "../shared/homebrew.sh"
 end
 
 # Load additional .rb files in ./etc/, if present.
