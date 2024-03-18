@@ -3,6 +3,8 @@ This directory contains common scripts that are used to install and configure di
 
 They are tweaked to run as part of a Vagrant deployment and may assume Vagrant-related settings (i.e. vagrant user, /home/vagrant, etc).
 
+- ## `ansible_cli.sh`
+  This simple script attempts to install Ansible CLI and some usefule modules/packages (i.e. ansible-lint, pypsrp, community.windows collection, etc).
 - ## `aws_cli.sh`
   Installs the AWS CLI V2 according to the following instructions: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html.
 
@@ -13,6 +15,8 @@ They are tweaked to run as part of a Vagrant deployment and may assume Vagrant-r
   After the installation completes, it is necessary to run `gcloud init` to connect to the appropriate Account/Project.
 - ## `homebrew.sh`
   [Homebrew](https://brew.sh/) is a Mac and Linux Package Management utility that simplifies dependendcy handling. It is possible, for instance, to manage the instalation of `kubenctx/kubens` and `fzf` and their dependencies in a single command, without dealing with additional repository-related steps.
+- ## `helm.sh`
+  Installs Helm (which is a package manager for Kubernetes) as instructed in the following link: https://helm.sh/docs/intro/install/#from-script.
 - ## `k3s.sh`
   K3s (https://k3s.io/) is a lightweight Kubernetes distribution. It is the basis of all Kubernetes-related labs in this repository.
 
