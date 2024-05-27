@@ -20,8 +20,8 @@ if test "${?}" -eq 0; then
   chown -R vagrant:vagrant /var/lib/rancher
 
   # This is to ensure that tools like Helm can use the correct K3s settings.
-  echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> .bashrc
-  . .bashrc
+  echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> /home/vagrant/.bashrc
+  . /home/vagrant/.bashrc
 else
   echo "=============================="
   echo "K3s Install FAILED!"
