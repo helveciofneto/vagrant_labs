@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     apt-get -yqq install libsasl2-dev python-dev-is-python3 libldap2-dev libssl-dev
     apt-get -yqq upgrade
 
-    su - vagrant -c "python3 -m pip install pylint mypy python-ldap --user"
+    su - vagrant -c "python3 -m pip install pylint mypy types-PyYAML python-ldap --user"
 
   SHELL
 
