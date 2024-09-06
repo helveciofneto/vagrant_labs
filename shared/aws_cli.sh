@@ -35,8 +35,8 @@ echo "=============================="
 echo "Installing Additional AWS Components..."
 echo "=============================="
 
-echo Installing boto and requests_ntlm...
-su - vagrant -c "python3 -m pip install boto requests_ntlm --user"
+echo Installing boto3 and requests_ntlm...
+su - vagrant -c "python3 -m pip install boto3 requests_ntlm --user"
 
 echo Installing saml2aws...
 su - vagrant -c 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && brew install saml2aws'
