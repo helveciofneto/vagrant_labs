@@ -30,7 +30,7 @@ else
   exit 1
 fi
 
-# Install additional useful tools (boto, samlapi.py, etc.)
+# Install additional useful tools (boto3, samlapi.py, etc.)
 echo "=============================="
 echo "Installing Additional AWS Components..."
 echo "=============================="
