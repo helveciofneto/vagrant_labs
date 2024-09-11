@@ -2,8 +2,9 @@
 This repository contains a set of VM lab environments for different products and platforms.
 
 Currently available products/platforms:
-- [AWX](awx) - Upstream project for Ansible Controller in Ansible Automation Platform
-- [K3s](k3s) - Lightweight Kubernetes
+- [AWX](awx) - Upstream project for Ansible Controller in Ansible Automation Platform.
+- [Elasticsearch/Kibana](elastic) - Distributed, RESTful search and analytics engine.
+- [K3s](k3s) - Lightweight Kubernetes.
 
 ## Requirements
 The VMs are managed in [VirtualBox](https://www.virtualbox.org/) through [Hashicorp Vagrant](https://www.vagrantup.com/), which allows them to be created/destroyed with a single command.
