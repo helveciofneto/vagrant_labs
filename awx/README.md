@@ -17,7 +17,7 @@ This build is based on the instructions provided by **Calvin Remsburg** on YouTu
   $ vagrant up
   ```
 - If there were no errors, you should see the URL and AWX admin password as follows:
-  ```bash
+  ```txt
   default: AWX build complete!
   default: ==============================
   default: AWX URL: http://192.168.56.10:30080

@@ -15,7 +15,7 @@ K3s Project Repository: https://github.com/k3s-io/k3s
   $ vagrant up
   ```
 - If there were no errors, you should see the status report as follows:
-  ```bash
+  ```txt
   default: ==============================
   default: K3s build complete!
   default: ==============================
