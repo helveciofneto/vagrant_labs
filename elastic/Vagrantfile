@@ -1,0 +1,73 @@
+HOSTNAME = "elastic"
+BOX_NAME = "ubuntu/jammy64"
+BOX_VERSION = "20240207.0.0" # 20231018.0.0 broke kustomize install script.
+IP_ADDRESS = "192.168.56.15"
+RAM_MB = "4096"
+CPU_COUNT = 4
+
+module Elasticsearch
+  VERSION = "8.15.1"
+  LICENSE_TYPE = "basic" # Change to "trial" for experimenting with additional features.
+  PORT = "9200" # Port when reaching from the outside. Container port is hardcoded to 9200.
+  # Initial user is hardcoded to "elastic" in this Elasticsearch setup.
+  PASSWORD = "elastic" # This must be at least 6 characters long.
+end
+
+module Kibana
+  VERSION = "8.15.1"
+  LICENSE_TYPE = "basic" # Change to "trial" for experimenting with additional features.
+  PORT = "5601" # Port when reaching from the outside. Container port is hardcoded to 5601.
+  # Initial user is hardcoded to "kibana_system" in this Kibana setup.
+  PASSWORD = "elastic" # This must be at least 6 characters long.
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.box = BOX_NAME
+  # config.vm.box_version = BOX_VERSION
+  config.vm.network "private_network", ip: IP_ADDRESS
+  config.vm.hostname = HOSTNAME
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = RAM_MB
+    vb.cpus = CPU_COUNT
+  end
+
+  # On Windows hosts, sometimes it freezes at the first connection attempt.
+  # Giving it 20 minutes helps but it may not solve the issue entirely.
+  # If it times out, try again with 'vagrant destroy -f && vagrant up'.
+  config.vm.boot_timeout = 1200
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get -yqq update
+
+    # Install some useful packages.
+    apt-get -yqq install gh htop nano policycoreutils vim whois zip ldap-utils
+    apt-get -yqq install apt-transport-https ca-certificates gnupg curl sudo sshpass
+    apt-get -yqq install build-essential python3-pip jq glances python-dev-is-python3
+    apt-get -yqq install libsasl2-dev libldap2-dev libssl-dev
+    apt-get -yqq upgrade
+
+    su - vagrant -c "python3 -m pip install pylint mypy types-PyYAML python-ldap --user"
+
+    snap install docker
+
+  SHELL
+
+  # Ensure that updates that require a restart are properly applied.
+  config.vm.provision :reload
+
+  # Install Elasticsearch and Kibana.
+  config.vm.provision "shell",
+    path: "elastic.sh",
+    env: {"IP_ADDRESS" => IP_ADDRESS,
+      "ELASTIC_VERSION" => Elasticsearch::VERSION,
+      "ELASTIC_LICENSE_TYPE" => Elasticsearch::LICENSE_TYPE,
+      "ELASTIC_LOCAL_PORT" => Elasticsearch::PORT,
+      "ELASTIC_PASSWORD" => Elasticsearch::PASSWORD,
+      "KIBANA_VERSION" => Kibana::VERSION,
+      "KIBANA_LICENSE_TYPE" => Kibana::LICENSE_TYPE,
+      "KIBANA_LOCAL_PORT" => Kibana::PORT,
+      "KIBANA_PASSWORD" => Kibana::PASSWORD}
+end
+
+# Load additional .rb files in ./etc/, if present.
+Dir["./etc/*.rb"].each{|rubyfile| load rubyfile}
