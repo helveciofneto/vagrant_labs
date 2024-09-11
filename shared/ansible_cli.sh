@@ -7,6 +7,8 @@
 echo "=============================="
 echo "Starting Ansible Install..."
 echo "=============================="
+mkdir -p /home/vagrant/.ansible
+chown vagrant:vagrant /home/vagrant/.ansible
 su - vagrant -c 'python3 -m pip install --upgrade pip --user'
 su - vagrant -c 'python3 -m pip install ansible-lint --user'
 su - vagrant -c 'python3 -m pip install pypsrp --user'
