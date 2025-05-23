@@ -33,8 +33,8 @@ docker run -p $ELASTIC_LOCAL_PORT:9200 --restart always \
 
 # Add Kibana System Password to Elastic
 current_try=0
-max_tries=10
-retry_interval=5
+max_tries=30
+retry_interval=10
 cmd_success=0
 while test "${current_try}" -lt "${max_tries}" -a "${cmd_success}" -eq 0; do
   sleep "${retry_interval}"
