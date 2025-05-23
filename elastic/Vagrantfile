@@ -1,12 +1,11 @@
 HOSTNAME = "elastic"
 BOX_NAME = "ubuntu/jammy64"
-BOX_VERSION = "20240207.0.0" # 20231018.0.0 broke kustomize install script.
 IP_ADDRESS = "192.168.56.15"
-RAM_MB = "4096"
-CPU_COUNT = 4
+RAM_MB = "3072"
+CPU_COUNT = 2
 
 module Elasticsearch
-  VERSION = "8.17.4"
+  VERSION = "8.18.1"
   LICENSE_TYPE = "basic" # Change to "trial" for experimenting with additional features.
   PORT = "9200" # Port when reaching from the outside. Container port is hardcoded to 9200.
   # Initial user is hardcoded to "elastic" in this Elasticsearch setup.
@@ -14,7 +13,7 @@ module Elasticsearch
 end
 
 module Kibana
-  VERSION = "8.17.4"
+  VERSION = "8.18.1"
   LICENSE_TYPE = "basic" # Change to "trial" for experimenting with additional features.
   PORT = "5601" # Port when reaching from the outside. Container port is hardcoded to 5601.
   # Initial user is hardcoded to "kibana_system" in this Kibana setup.
@@ -23,7 +22,6 @@ end
 
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME
-  # config.vm.box_version = BOX_VERSION
   config.vm.network "private_network", ip: IP_ADDRESS
   config.vm.hostname = HOSTNAME
   config.vm.provider "virtualbox" do |vb|
